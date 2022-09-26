@@ -3,55 +3,52 @@ package com.ty.school.dao;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence; 
+import javax.persistence.Persistence;
 
-import com.ty.school.dto.Student;
+import com.ty.school.dto.User;
 
-public class StudentDAO {
-	EntityManagerFactory entityManagerFactory=null;
+public class UserDAO {
+	EntityManagerFactory entityManagerFactory;
 	
-	public Student saveStudent(Student s)
+	public void saveUser(User u)
 	{
 		entityManagerFactory=Persistence.createEntityManagerFactory("vikas");
 		EntityManager entityManager=entityManagerFactory.createEntityManager();
 		EntityTransaction entityTransaction=entityManager.getTransaction();
 		entityTransaction.begin();
-		entityManager.persist(s);
+		entityManager.persist(u);
 		entityTransaction.commit();
-		return s;
-		
 	}
-	public Student findStudent(int id)
+	public User findUserById(int id)
 	{
 		entityManagerFactory=Persistence.createEntityManagerFactory("vikas");
 		EntityManager entityManager=entityManagerFactory.createEntityManager();
-		Student s=entityManager.find(Student.class, id);
-		return s;
+		User user=entityManager.find(User.class, id);
+		return user;
 		
 	}
-	public boolean deleteStudent(int id)
+	public boolean deleteUser(int id)
 	{
 		entityManagerFactory=Persistence.createEntityManagerFactory("vikas");
 		EntityManager entityManager=entityManagerFactory.createEntityManager();
-		Student s=entityManager.find(Student.class, id);
 		EntityTransaction entityTransaction=entityManager.getTransaction();
-		if (s!=null) {
-			entityManager.remove(s);
+		User user=entityManager.find(User.class,id);
+		if (user!=null) {
+			entityManager.remove(user);
 			return true;
 		}
 		return false;
-		
 	}
-	public Student updateStudent(Student s)
+	public User updateUser(User user)
 	{
 		entityManagerFactory=Persistence.createEntityManagerFactory("vikas");
 		EntityManager entityManager=entityManagerFactory.createEntityManager();
 		EntityTransaction entityTransaction=entityManager.getTransaction();
 		entityTransaction.begin();
-		Student s1=entityManager.merge(s);
+		User user2=entityManager.merge(user);
 		entityTransaction.commit();
-		return s1;
-		
+		return user2;
+				
 	}
 
 }
