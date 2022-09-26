@@ -9,7 +9,7 @@ import javax.persistence.Id;
 @Entity
 public class User {
 		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
+		
 		private int id;
 		private String name;
 		@Column( unique = true)
@@ -52,6 +52,11 @@ public class User {
 		}
 		public void setGender(String gender) {
 			this.gender = gender;
+		}
+		@Override
+		public String toString() {
+			return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", phone="
+					+ phone + ", gender=" + gender + "]";
 		}
 		
 		
